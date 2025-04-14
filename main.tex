@@ -6,9 +6,18 @@
 \usepackage[english]{babel}
 \usepackage[margin=1in]{geometry}
 \usepackage{enumitem}
+\usepackage{fancyhdr}
 \usepackage{hyperref}
 
-% CONFIGURATION
+% HEADER CONFIGURATION
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textbf{Estadistica Computacional}}
+\chead{\textbf{FINESI}}
+\rhead{\textbf{\today}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% GENERAL CONFIGURATION
 \setlist{itemsep=3pt, topsep=5pt}
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
 
@@ -20,6 +29,7 @@
     \textbf{Shiny Application: t-test and ANOVA} \\[3mm]
     Instructor: Fred Torres Cruz \\
     Author: Jorge Luis Flores Turpo \\[3mm]
+    \href{https://yorchisyorch.shinyapps.io/Aplicacion_Shany/}{Aplicación Shiny Publicada} \\[3mm]
     \href{https://github.com/Yorchisflrs/aplicacion_anova_en_R.git}{GitHub Repository} \\
     \today
 \end{center}
