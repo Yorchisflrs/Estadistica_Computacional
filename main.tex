@@ -1,0 +1,114 @@
+\documentclass[12pt]{article}
+
+% ESSENTIAL PACKAGES
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% CONFIGURATION
+\setlist{itemsep=3pt, topsep=5pt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=cyan}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\large National University of the Altiplano} \\
+    \textbf{Faculty of Statistical and Computer Engineering} \\[5mm]
+    \textbf{Shiny Application: t-test and ANOVA} \\[3mm]
+    Instructor: Fred Torres Cruz \\
+    Author: Jorge Luis Flores Turpo \\[3mm]
+    \href{https://github.com/Yorchisflrs/aplicacion_anova_en_R.git}{GitHub Repository} \\
+    \today
+\end{center}
+
+\section{Introduction}
+The application developed in R/Shiny enables complete statistical analysis for mean comparison through parametric tests. Its interactive design facilitates:
+
+\begin{itemize}
+    \item \textbf{Descriptive analysis}: Calculation of measures such as mean, median, standard deviation and coefficient of variation
+    \item \textbf{Inferential tests}: Implementation of:
+    \begin{itemize}
+        \item t-tests for independent and paired samples
+        \item One-way ANOVA for multiple group comparison
+    \end{itemize}
+    \item \textbf{Data validation}: Automatic detection of outliers and missing values
+\end{itemize}
+
+\section{Objectives}
+\subsection{General Objective}
+To develop an interactive platform that integrates basic statistical analysis with didactic tools to facilitate result interpretation.
+
+\subsection{Specific Objectives}
+\begin{itemize}
+    \item Implement a tab-based interface for better navigation
+    \item Generate automatic interpretations of statistical results
+    \item Provide graphical visualizations with integrated explanations
+    \item Enable result export in standard formats (Excel and PDF)
+\end{itemize}
+
+\section{Methodology}
+\subsection{Application Structure}
+The tool follows a modular architecture:
+
+\begin{itemize}
+    \item \textbf{Control panel}:
+    \begin{itemize}
+        \item File upload (CSV/Excel)
+        \item Variable selection
+        \item Analysis configuration
+    \end{itemize}
+    \item \textbf{Visualization}:
+    \begin{itemize}
+        \item Result tables
+        \item Interactive graphs
+        \item Textual interpretation
+    \end{itemize}
+\end{itemize}
+
+\subsection{Implemented Technologies}
+Main packages used include:
+
+\begin{itemize}
+    \item \textbf{Shiny}: For interactive web interface
+    \item \textbf{ggplot2}: High-quality graph generation
+    \item \textbf{dplyr}: Efficient data manipulation
+    \item \textbf{DT}: Interactive table visualization
+\end{itemize}
+
+\section{Results and Features}
+The application offers:
+
+\begin{itemize}
+    \item \textbf{Complete analysis}:
+    \begin{itemize}
+        \item Detailed descriptive statistics
+        \item Hypothesis testing with p-value
+        \item Assumption validation
+    \end{itemize}
+    \item \textbf{Intuitive visualization}:
+    \begin{itemize}
+        \item Group boxplots
+        \item Distribution histograms
+        \item Scatter plots
+    \end{itemize}
+    \item \textbf{Flexible export}:
+    \begin{itemize}
+        \item PDF reports with results
+        \item Excel tables for further analysis
+    \end{itemize}
+\end{itemize}
+
+\section{Conclusions}
+The developed application represents a complete solution that:
+
+\begin{itemize}
+    \item Combines analytical capabilities with a didactic approach
+    \item Facilitates learning of statistical concepts
+    \item Provides professional-ready results
+    \item Adapts to various academic and research contexts
+\end{itemize}
+
+\end{document}
