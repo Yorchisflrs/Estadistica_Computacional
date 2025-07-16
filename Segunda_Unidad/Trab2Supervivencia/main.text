@@ -1,0 +1,117 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+
+%---------------- Encabezado / Pie de página ----------------%
+\pagestyle{fancy}
+\fancyhead[LO,L]{Estadistica Computacional}
+\fancyhead[CO,C]{FINESI}
+\fancyhead[RO,R]{\today}
+\fancyfoot[CO,C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+%------------------------------------------------------------%
+
+\begin{document}
+
+\noindent\textbf{Universidad Nacional del Altiplano}\\
+Facultad de Ingeniería Estadística e Informática\\
+\textbf{Docente:} Fred Torres Cruz\\
+\textbf{Autor:} \textit{Flores Turpo Jorge Luis}\\[1em]
+
+\begin{center}
+\Large\textbf{Trabajo Encargado N.º 013\\[0.5em]
+\textbf{Repositorio}: \url{https://github.com/Yorchisflrs/Juego_sobrevivientes}\\
+\emph{Juego “Sobrevivientes” en Python}}
+\end{center}
+
+\section*{1. Objetivo del proyecto}
+Diseñar e implementar, con buenas prácticas de ingeniería de software, el juego \emph{Sobrevivientes}.  
+El programa debe:
+\begin{itemize}
+  \item Simular la distribución y el canje de dulces entre 22 jugadores (nivel 1) y 2 equipos de 11 (nivel 2).
+  \item Garantizar que, con colaboración, al menos un jugador alcance la condición de “sobrevivir” (poseer un chupetín).
+  \item Mostrar resultados en consola con tablas \texttt{Rich} y exponer una CLI profesional mediante \texttt{Typer}.
+  \item Contar con pruebas unitarias (\texttt{pytest}) que verifiquen las reglas principales.
+\end{itemize}
+
+\section*{2. Estructura de carpetas}
+\vspace{-2mm}
+\begin{verbatim}
+sobrevivientes/
+├── __init__.py      # CLI Typer
+├── config.yaml      # Reglas y parámetros
+├── levels.py        # Motor de niveles
+├── models.py        # Candy, Inventory, Player
+├── rules.py         # Carga y aplicación de reglas
+tests/
+├── test_rules.py    # Regla tripleta y romper chupetín
+└── test_levels.py   # Integración nivel 1 y 2
+\end{verbatim}
+
+\section*{3. Principales clases}
+\begin{description}
+  \item[\texttt{Candy}] \emph{Enum} con valores \textsc{Limón}, \textsc{Pera}, \textsc{Huevo}, \textsc{Chupetín}.
+  \item[\texttt{Inventory}] Multiconjunto derivado de \texttt{Counter}; incluye \texttt{add\_items}, \texttt{remove\_items} y \texttt{choose\_any}.
+  \item[\texttt{Player}] Almacena inventario y contador de acciones; aplica reglas hasta agotar combinaciones.
+  \item[\texttt{LevelEngine}] Orquestador: reparte dulces, ejecuta reglas, dona recursos y efectúa \emph{crafting} colectivo.
+\end{description}
+
+\section*{4. Reglas implementadas}
+\begin{enumerate}
+  \item \textbf{Nivel 1 – Tripleta}\\
+        \(\text{Limón} + \text{Pera} + \text{Huevo} \rightarrow \text{Chupetín} + 1\text{ dulce a elección}\).
+  \item \textbf{Nivel 2 – Sexteto}\\
+        \(2\text{L} + 2\text{P} + 2\text{H} \rightarrow \text{Chupetín} + 2\text{ dulces a elección}\).
+  \item \textbf{Nivel 2 – Romper chupetín}\\
+        \(\text{Chupetín} \rightarrow 6\text{ dulces a elección}\).
+\end{enumerate}
+
+\section*{5. Algoritmo de donaciones y \emph{crafting}}
+\begin{enumerate}
+  \item Fase \textsc{Greedy} 1-a-1: los jugadores con duplicados donan a quienes no cumplen la condición mínima.
+  \item Fase de \emph{crafting colectivo} (solo nivel 2): se agrupan globalmente dulces para formar sextetos, asignando el resultado al primer
+        jugador que aún no sobreviva. Si no hay dulces suficientes, se desmantela un chupetín para generar seis piezas y se repite el proceso.
+\end{enumerate}
+
+\section*{6. Resultados de prueba}
+\begin{itemize}
+  \item Todos los casos de prueba (\texttt{pytest}) pasan con éxito.
+  \item En ejecución interactiva:
+        \begin{itemize}
+          \item Nivel 1: suelen sobrevivir 8–12 jugadores.
+          \item Nivel 2: al menos un jugador sobrevive; con suficientes combinaciones, pueden sobrevivir todos.
+        \end{itemize}
+\end{itemize}
+
+\section*{7. Ejecución}
+\begin{verbatim}
+$ python -m sobrevivientes --level 1
+$ python -m sobrevivientes --level 2
+\end{verbatim}
+
+\vspace{2mm}
+\begin{center}
+\includegraphics[width=.50\linewidth]{image21.png}\\
+\small{Figura 1. Salida de consola formateada con \texttt{Rich}.}
+\end{center}
+
+\section*{8. Conclusiones}
+El uso de \texttt{Typer} y \texttt{Rich} ofrece una interfaz profesional con código mínimo.  
+El algoritmo de \emph{crafting} colectivo demuestra que la cooperación distribuye equitativamente
+recursos escasos y garantiza la supervivencia de al menos un participante, cumpliendo el
+objetivo del juego.
+
+\vspace{1em}
+\noindent\rule{\linewidth}{0.4pt}\\
+
+\textbf{Versión}: v1.0 -- \today
+
+\end{document}
