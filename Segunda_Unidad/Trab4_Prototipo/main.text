@@ -1,0 +1,119 @@
+
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{parskip}
+
+\pagestyle{fancy}
+\fancyhead[LO,L]{Estadística Computacional}
+\fancyhead[CO,C]{FINESI}
+\fancyhead[RO,R]{\today}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+
+\noindent \textbf{Universidad Nacional del Altiplano\\
+Facultad de Ingeniería Estadística e Informática\\
+Docente: } Fred Torres Cruz\\
+\textbf{Autor :} Jorge Luis Flores Turpo\\
+
+\vspace{5mm}
+\noindent\textbf{Trabajo Encargado - N° 015: Informe de Prueba de Usuario - Data Insights Pro}
+
+\vspace{5mm}
+\section*{1. Introducción}
+
+La presente prueba de usuario se realizó con el objetivo de validar la funcionalidad, usabilidad y comprensión del prototipo web \textbf{Data Insights Pro}, una aplicación educativa desarrollada en Python + Flask orientada al análisis discriminante (LDA y QDA). La sesión fue grabada y está disponible públicamente en el siguiente enlace:
+
+\begin{center}
+\href{https://www.youtube.com/watch?v=fOg2MQdrRPo}{\texttt{https://www.youtube.com/watch?v=fOg2MQdrRPo}}
+\end{center}
+
+\section*{2. Objetivo de la prueba}
+
+Identificar fortalezas, debilidades y oportunidades de mejora en el diseño de la interfaz, el flujo de interacción y la interpretación de resultados estadísticos por parte de usuarios reales y un evaluador experto.
+
+\section*{3. Participantes}
+
+\begin{itemize}
+  \item Ángel – Usuario general
+  \item Yamilet – Usuario general
+  \item Yimmi – Usuario general
+  \item Ing. Renzo – Especialista evaluador
+\end{itemize}
+
+\section*{4. Metodología}
+
+Se realizó una prueba en la cual cada participante interactuó con el prototipo mostrado en pantalla. Se formularon preguntas clave sobre:
+\begin{itemize}
+  \item Lo primero que les llamó la atención
+  \item Qué entendieron que hacía la aplicación
+  \item Qué mejorarían en términos visuales y funcionales
+\end{itemize}
+
+\section*{5. Resultados por participante}
+
+\subsection*{Ángel}
+\textbf{Aspectos positivos:} gráfico atractivo, opciones de exportación claras.\\
+\textbf{Observaciones:} distribución poco optimizada, confusión sobre botones y funcionalidad.\\
+\textbf{Sugerencias:} reducir espacio en blanco, incluir más gráficos, aclarar interfaz.
+
+\subsection*{Yamilet}
+\textbf{Aspectos positivos:} resultados visibles, reconoció flujo estadístico básico.\\
+\textbf{Observaciones:} gráficos poco interpretables.\\
+\textbf{Sugerencias:} mejorar la calidad y variedad de los gráficos.
+
+\subsection*{Yimmi}
+\textbf{Aspectos positivos:} comprendió el análisis discriminante aplicado.\\
+\textbf{Observaciones:} carencia de ayudas visuales.\\
+\textbf{Sugerencias:} más claridad en estructura y nomenclatura.
+
+\subsection*{Ing. Renzo}
+\textbf{Aspectos positivos:} potencial técnico alto.\\
+\textbf{Observaciones:} interfaz sin foco visual, sin jerarquía, poco amigable para la toma de decisiones.\\
+\textbf{Sugerencias:} rediseñar el layout (máx. 2–3 zonas), usar asistentes, mejorar tipografía y colores, agregar glosario contextual y teoría aplicada a gráficos.
+
+\section*{6. Análisis UX y educativo}
+
+\begin{itemize}
+  \item \textbf{Foco visual}: actualmente disperso. Se sugiere una estructura jerárquica clara.
+  \item \textbf{Accesibilidad}: falta retroalimentación en botones y ayuda en hover.
+  \item \textbf{Educación}: debe integrar glosario, guías emergentes, interpretación automática.
+  \item \textbf{Gráficos}: mejorar colores, leyendas y correspondencia visual con el resultado.
+\end{itemize}
+
+\section*{7. Recomendaciones de mejora}
+
+\begin{itemize}
+  \item Implementar asistente paso a paso para guiar el proceso.
+  \item Aplicar un layout limpio, dividido en máximo 3 secciones.
+  \item Insertar textos interpretativos después de mostrar resultados.
+  \item Añadir glosario educativo y ayuda contextual.
+  \item Diseñar visualmente para tomadores de decisión no técnicos (colores semáforo, íconos, leyendas claras).
+\end{itemize}
+
+\section*{8. Captura del prototipo evaluado}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{captura100.png}
+    \caption{Prototipo actual mostrado durante la prueba de usuario.}
+\end{figure}
+
+\section*{9. Conclusiones}
+
+La experiencia de prueba permitió recoger opiniones valiosas tanto de usuarios generales como de un especialista. Las observaciones convergen en que el sistema tiene potencial educativo y técnico alto, pero requiere rediseño visual, simplificación de la navegación, ayudas contextuales y visualización centrada en interpretación.
+
+\end{document}
