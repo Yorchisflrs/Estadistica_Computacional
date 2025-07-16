@@ -1,0 +1,72 @@
+\documentclass[a4paper,10pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{geometry}
+\usepackage{hyperref}
+\geometry{a4paper, portrait, margin=1in}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{Estadística Computacional}}
+\fancyhead[R]{Universidad Nacional del Altiplano - FINESI}
+\fancyfoot[C]{\thepage}
+
+\begin{document}
+\textbf{Docente} Fred Torres Cruz \\
+\textbf{Autor:} Jorge Luis Flores Turpo \\
+\textbf{Curso:} Estadística Computacional \\
+\textbf{Video demostrativo:} \url{https://youtu.be/WD5Oy_d7nRs} \\
+\textbf{Repositorio GitHub:} \url{https://github.com/Yorchisflrs/Analisis_discriminante}
+\section{Actividad N° 016 – Análisis Discriminante PRO}
+
+\subsection*{1. Descripción general}
+
+El presente proyecto, titulado \textbf{“Análisis Discriminante PRO”}, consiste en el desarrollo de una aplicación web educativa e interactiva, capaz de ejecutar modelos estadísticos de clasificación supervisada como el Análisis Discriminante Lineal (LDA) y el Cuadrático (QDA). Fue construida con Python y Flask, integrando librerías como \texttt{scikit-learn}, \texttt{pandas}, \texttt{plotly} y \texttt{weasyprint}.
+
+\subsection*{2. Objetivo}
+
+Facilitar el aprendizaje y aplicación práctica del análisis discriminante, mediante una interfaz amigable que permita:
+
+\begin{itemize}
+    \item Cargar archivos \texttt{.csv} o \texttt{.xlsx}.
+    \item Seleccionar variable objetivo.
+    \item Aplicar modelos LDA o QDA con configuración mínima.
+    \item Visualizar biplots, matriz de confusión y curva ROC.
+    \item Generar e interpretar reportes en PDF con resultados estadísticos.
+\end{itemize}
+
+\subsection*{3. Fundamento teórico}
+
+El \textbf{Análisis Discriminante} es una técnica supervisada que asigna observaciones a grupos predefinidos. LDA asume homogeneidad en las matrices de covarianza y genera fronteras lineales, mientras que QDA permite matrices distintas por grupo, generando fronteras cuadráticas. Ambas técnicas buscan maximizar la separación entre clases.
+
+\subsection*{4. Aplicación en el sistema}
+
+Los usuarios sin conocimientos técnicos pueden cargar sus datos y ejecutar modelos con pocos clics. La aplicación:
+
+\begin{itemize}
+    \item Valida automáticamente las columnas y detecta la variable objetivo.
+    \item Entrena modelos con validación cruzada.
+    \item Presenta resultados gráficos y explicaciones pedagógicas.
+    \item Permite exportar informes interpretativos en PDF.
+\end{itemize}
+
+\subsection*{5. Justificación del caso aplicado}
+
+El análisis se aplicó a un conjunto de datos educativos, donde se deseaba clasificar estudiantes según su rendimiento. Al aplicar LDA, se obtuvo una precisión del 82\%, y con QDA del 85\%, evidenciando mejor desempeño al considerar covarianzas distintas.
+
+\textbf{Interpretación:} El modelo logró separar satisfactoriamente los grupos definidos (por ejemplo, “Aprobado” vs “Desaprobado”). El biplot evidenció la contribución de cada variable predictora. La matriz de confusión mostró una alta tasa de aciertos, y el AUC superior a 0.85 sugiere un modelo robusto.
+
+\subsection*{6. Sostenibilidad y valor educativo}
+
+Este sistema no requiere instalación externa y respeta la privacidad: los datos se procesan localmente. Sirve como recurso autoformativo para estudiantes de estadística, ciencia de datos y carreras afines. La interfaz guiada incluye glosario, tooltips, y está diseñada para aprendizaje visual.
+
+\subsection*{7. Conclusión}
+
+“Análisis Discriminante PRO” representa una propuesta sólida de integración entre teoría estadística y herramientas tecnológicas. Mejora la comprensión del análisis discriminante mediante una experiencia interactiva, accesible y educativa.
+
+\vspace{0.5cm}
+\noindent \textbf{Palabras clave:} Análisis discriminante, LDA, QDA, visualización, Flask, Estadística Computacional.
+
+\end{document}
