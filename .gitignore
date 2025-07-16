@@ -1,0 +1,44 @@
+# Archivos temporales y entornos virtuales
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git/
+.mypy_cache/
+.pytest_cache/
+.hypothesis/
+
+# Archivos de Jupyter
+.ipynb_checkpoints/
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos grandes de datos (si los hay)
+*.csv.bak
+*.xlsx.bak
+
+# Archivos de salida que se regeneran
+output/temp/
+*.tmp

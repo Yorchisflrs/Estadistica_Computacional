@@ -1,0 +1,25 @@
+/home/yorchisyorch/Desktop/Quinto_semestre/Estadistica_computacional/DataSet/genera_reporte.py:22: DeprecationWarning: The parameter "ln" is deprecated since v2.5.2. Instead of ln=True use new_x=XPos.LMARGIN, new_y=YPos.NEXT.
+  pdf.cell(0, 10, "ENAHO 2022 – Reporte de Evidencia", ln=True, align="C")
+Traceback (most recent call last):
+  File "/home/yorchisyorch/Desktop/Quinto_semestre/Estadistica_computacional/DataSet/venv/lib/python3.12/site-packages/fpdf/fpdf.py", line 4873, in normalize_text
+    return text.encode(self.core_fonts_encoding).decode("latin-1")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'latin-1' codec can't encode character '\u2013' in position 11: ordinal not in range(256)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/yorchisyorch/Desktop/Quinto_semestre/Estadistica_computacional/DataSet/genera_reporte.py", line 22, in <module>
+    pdf.cell(0, 10, "ENAHO 2022 – Reporte de Evidencia", ln=True, align="C")
+  File "/home/yorchisyorch/Desktop/Quinto_semestre/Estadistica_computacional/DataSet/venv/lib/python3.12/site-packages/fpdf/fpdf.py", line 221, in wrapper
+    return fn(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yorchisyorch/Desktop/Quinto_semestre/Estadistica_computacional/DataSet/venv/lib/python3.12/site-packages/fpdf/deprecation.py", line 32, in wrapper
+    return fn(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yorchisyorch/Desktop/Quinto_semestre/Estadistica_computacional/DataSet/venv/lib/python3.12/site-packages/fpdf/fpdf.py", line 3228, in cell
+    text = self.normalize_text(text)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/yorchisyorch/Desktop/Quinto_semestre/Estadistica_computacional/DataSet/venv/lib/python3.12/site-packages/fpdf/fpdf.py", line 4875, in normalize_text
+    raise FPDFUnicodeEncodingException(
+fpdf.errors.FPDFUnicodeEncodingException: Character "–" at index 11 in text is outside the range of characters supported by the font used: "helveticaB". Please consider using a Unicode font.
