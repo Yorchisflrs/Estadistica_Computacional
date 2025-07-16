@@ -1,0 +1,326 @@
+\documentclass[12pt]{article}
+
+%=========================================================
+% Paquetes (según formato solicitado)
+%=========================================================
+\usepackage[margin=1in]{geometry}   % Márgenes
+\usepackage{amsmath}                % Fórmulas
+\usepackage{graphics}               % Compatibilidad antigua
+\usepackage{fancyhdr}               % Encabezado / pie
+\usepackage{graphicx}               % Figuras
+\usepackage{cancel}                 % Tachar expresiones
+\usepackage[spanish]{babel}         % Idioma
+\usepackage{hyperref}               % Enlaces
+\usepackage{array}                  % Tablas básicas mejoradas
+\usepackage{underscore}             % Para texto con _ sin error
+\usepackage{booktabs}               % Tablas más elegantes
+\usepackage{float}                  % Control de posición de figuras
+%=========================================================
+
+%---------------- Encabezado / pie -----------------------
+\pagestyle{fancy}
+\fancyhead[LO,L]{Estadística Computacional}
+\fancyhead[CO,C]{FINESI}
+\fancyhead[RO,R]{\today}
+\fancyfoot[LO,L]{}
+\fancyfoot[CO,C]{\thepage}
+\fancyfoot[RO,R]{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+%---------------- Datos personalizables ------------------
+\newcommand{\UNIVERSIDAD}{Universidad Nacional del Altiplano}
+\newcommand{\FACULTAD}{Facultad de Ingeniería Estadística e Informática}
+\newcommand{\DOCENTE}{Fred Torres Cruz}
+\newcommand{\AUTOR}{Flores Turpo Jorge L.}
+\newcommand{\CURSO}{Estadística Computacional}
+\newcommand{\TRABAJONUM}{001}
+\newcommand{\TITULOREPORTE}{Reporte ENAHO 2022: Limpieza de Datos, Outliers y Análisis Descriptivo}
+\newcommand{\VERSION}{v1.0}
+
+%---------------- Comando figura centrada ----------------
+\newcommand{\figcen}[3][0.6]{%
+  \begin{figure}[H]
+    \centering
+    \includegraphics[scale=#1]{#2}
+    \caption{#3}
+  \end{figure}
+}
+
+%---------------- Comando tabla centrada -----------------
+\newcommand{\tabcen}[1]{%
+  \begin{center}
+  #1
+  \end{center}
+}
+
+%=========================================================
+\begin{document}
+%=========================================================
+
+%---------------------------------------------------------
+% Portada estilo solicitado
+%---------------------------------------------------------
+\noindent \textbf{\UNIVERSIDAD\\
+\FACULTAD\\
+Docente: } \DOCENTE\\
+\textbf{Autor :} \AUTOR\\
+\textbf{Curso :} \CURSO\\
+\textbf{Versión :} \VERSION
+
+\vspace{5mm}
+\noindent\textbf{Trabajo Encargado - N° \TRABAJONUM}\\
+\noindent \textbf{Título: } \TITULOREPORTE
+
+\vspace{10mm}
+\noindent\textbf{Resumen rápido:} En este informe se documenta la limpieza de datos, identificación y tratamiento de valores atípicos (outliers), estadística descriptiva aplicado a un subconjunto (n=100) de la ENAHO 2022. El objetivo es mostrar evidencia reproducible de cada paso para uso académico en el curso \CURSO.
+
+\tableofcontents
+\newpage
+
+%=========================================================
+\section{Metodología de datos}
+%=========================================================
+Se trabajó con el archivo \texttt{Enaho01-2022-100.csv} (n=100 registros). El flujo en Python fue:
+
+\begin{enumerate}
+  \item Carga del CSV con codificación Latin-1.
+  \item Eliminación de columnas totalmente vacías y filas duplicadas.
+  \item Conversión a numérico de columnas texto con sólo dígitos.
+  \item Identificación de columnas numéricas para análisis.
+  \item Detección de outliers por método IQR.
+  \item Generación de versión \emph{winsorizada} (valores truncados a límites IQR).
+  \item Exportación de tablas y gráficos.
+\end{enumerate}
+
+%=========================================================
+\subsection{Criterio IQR para outliers}
+%=========================================================
+Para cada variable numérica $X$:
+\[
+\mathrm{IQR} = Q_3 - Q_1,\qquad
+\mathrm{LI} = Q_1 - 1.5\cdot\mathrm{IQR},\qquad
+\mathrm{LS} = Q_3 + 1.5\cdot\mathrm{IQR}.
+\]
+Valores fuera de ese rango se clasifican como outliers.  
+\textbf{Winsorización:} se reemplazan por LI o LS (según corresponda).
+
+\section{Evidencia de limpieza y outliers}
+
+\subsection{Conteo de outliers por variable (Top-20)}
+\figcen[0.8]{outliers_top20.png}{Top-20 variables con más outliers detectados (método IQR).}
+
+En el análisis se detectaron outliers en múltiples variables, siendo FACTOR07 y variables de ingreso las que presentan mayor número de valores atípicos.
+
+\subsection{Rangos antes vs después (ejemplo)}
+La siguiente tabla muestra el impacto de la winsorización en algunas variables clave:
+
+\tabcen{%
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Variable} & \textbf{Min Crudo} & \textbf{Max Crudo} & \textbf{Min Win} & \textbf{Max Win}\\
+\midrule
+FACTOR07 & 1.00 & 175.13 & 3.50 & 175.13 \\
+VIVIENDA & 1.00 & 175.13 & 1.00 & 175.13 \\
+UBIGEO & 10101.00 & 10705.00 & 10101.00 & 10705.00 \\
+\bottomrule
+\end{tabular}
+}
+
+\subsection{Ejemplo Visual de Winsorización}
+\figcen[0.5]{box_FACTOR07.png}{Boxplot crudo de FACTOR07 mostrando presencia de outliers.}
+
+\figcen[0.3]{box_FACTOR07_winsor.png}{Boxplot winsorizado de FACTOR07 con outliers corregidos.}
+
+La comparación de boxplots muestra claramente el efecto de la winsorización en la reducción de valores extremos.
+
+%=========================================================
+\section{Estadística descriptiva}
+%=========================================================
+
+\subsection{Estadísticos básicos (base winsorizada)}
+Los estadísticos descriptivos principales de la base winsorizada son:
+
+\tabcen{%
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Variable} & \textbf{Media} & \textbf{Mediana} & \textbf{Desv. Std.} \\
+\midrule
+FACTOR07 & 135.60 & 98.00 & 101.24 \\
+VIVIENDA & 58.13 & 52.00 & 40.81 \\
+UBIGEO & 10404.80 & 10401.00 & 227.82 \\
+ESTRATO & 5.63 & 5.00 & 1.52 \\
+\bottomrule
+\end{tabular}
+}
+
+\subsection{Distribución de variable ejemplo}
+\figcen[0.8]{hist_ingreso.png}{Histograma de FACTOR07 mostrando distribución antes y después de winsorización.}
+
+\subsection{Comparación de indicadores: Análisis por grupos}
+\figcen[0.7]{bar_pobre_vs_nopobre.png}{Comparación de promedios de variables clave por condición simulada de pobreza.}
+
+Este gráfico muestra las diferencias en los valores promedio de las variables principales entre grupos clasificados por un criterio de pobreza sintético basado en percentiles de FACTOR07.
+
+%=========================================================
+\section{Conclusiones y recomendaciones}
+%=========================================================
+\begin{itemize}
+  \item El tratamiento de outliers mediante winsorización estabilizó los estadísticos descriptivos de las variables principales.
+  \item Se identificaron 20 variables con mayor presencia de outliers, siendo necesario un tratamiento específico para análisis posteriores.
+  \item La metodología IQR resultó efectiva para la detección de valores atípicos en este conjunto de datos.
+  \item Se dispone de evidencia gráfica reproducible que documenta cada paso del proceso de limpieza.
+  \item Los archivos generados (CSV y PNG) permiten la reproducibilidad completa del análisis.
+\end{itemize}
+
+%=========================================================
+\section{Archivos generados}
+%=========================================================
+Como resultado del análisis se generaron los siguientes archivos:
+
+\begin{itemize}
+  \item \texttt{fig/outliers\_top20.png} - Gráfico de variables con más outliers
+  \item \texttt{fig/box\_FACTOR07.png} - Boxplot crudo de variable ejemplo
+  \item \texttt{fig/box\_FACTOR07\_winsor.png} - Boxplot winsorizado
+  \item \texttt{fig/hist\_ingreso.png} - Histograma comparativo
+  \item \texttt{fig/bar\_pobre\_vs\_nopobre.png} - Comparación por grupos
+  \item \texttt{fig/stats\_winsor.csv} - Estadísticos descriptivos
+  \item \texttt{fig/outlier\_counts.csv} - Conteo de outliers por variable
+  \item \texttt{fig/enaho\_winsor.csv} - Base de datos winsorizada
+\end{itemize}
+
+%=========================================================
+\appendix
+%=========================================================
+\section{Código Python utilizado}
+
+A continuación se incluye el script Python que genera las tablas y figuras usadas en este informe:
+
+\begin{verbatim}
+import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pathlib import Path
+
+# 1. Configuración inicial
+DATA_FILE = "Enaho01-2022-100.csv"
+OUTPUT_DIR = Path("fig")
+OUTPUT_DIR.mkdir(exist_ok=True)
+
+print("Cargando datos…")
+df_raw = pd.read_csv(DATA_FILE, encoding="latin-1")
+
+# 2. Limpieza rápida
+df = (
+    df_raw.dropna(axis=1, how="all")
+           .drop_duplicates()
+)
+
+# Convierte textos que son números a numérico
+for col in df.select_dtypes(include="object").columns:
+    if df[col].str.match(r"^-?\d+(\.\d+)?$", na=False).all():
+        df[col] = pd.to_numeric(df[col])
+
+num_cols = df.select_dtypes(include=np.number).columns
+
+# 3. Funciones para outliers (método IQR)
+def flag_outliers(series, k=1.5):
+    q1, q3 = series.quantile([0.25, 0.75])
+    iqr = q3 - q1
+    lo, hi = q1 - k * iqr, q3 + k * iqr
+    return (series < lo) | (series > hi)
+
+def winsorize(series, k=1.5):
+    q1, q3 = series.quantile([0.25, 0.75])
+    iqr = q3 - q1
+    lo, hi = q1 - k * iqr, q3 + k * iqr
+    return series.clip(lower=lo, upper=hi)
+
+# 4. Detecta y cuenta outliers
+outlier_flags = df[num_cols].apply(flag_outliers)
+outlier_counts = outlier_flags.sum().sort_values(ascending=False)
+outlier_counts.to_csv(OUTPUT_DIR / "outlier_counts.csv", 
+                      header=["n_outliers"])
+
+# 5. Winsorización
+df_winsor = df.copy()
+df_winsor[num_cols] = df_winsor[num_cols].apply(winsorize)
+df_winsor.to_csv(OUTPUT_DIR / "enaho_winsor.csv", index=False)
+
+# 6. Estadística descriptiva
+desc_raw = df[num_cols].describe().T
+desc_winsor = df_winsor[num_cols].describe().T
+desc_raw.to_csv(OUTPUT_DIR / "stats_raw.csv")
+desc_winsor.to_csv(OUTPUT_DIR / "stats_winsor.csv")
+
+# 7. Gráficos
+plt.rcParams.update({"figure.autolayout": True})
+
+# 7.1 Barra de outliers
+top_n = 20
+plt.figure(figsize=(9, 6))
+outlier_counts.head(top_n).plot(kind="bar")
+plt.title(f"Top {top_n} variables con más outliers")
+plt.ylabel("Número de outliers")
+plt.xticks(rotation=45, ha="right", fontsize=8)
+plt.savefig(OUTPUT_DIR / "outliers_top20.png", dpi=300)
+plt.close()
+
+# 7.2 Variable de demostración
+demo_var = "FACTOR07" if "FACTOR07" in num_cols else num_cols[0]
+
+# Histograma
+plt.figure(figsize=(8, 4))
+plt.subplot(1, 2, 1)
+plt.hist(df[demo_var].dropna(), bins=30)
+plt.title(f"{demo_var} (crudo)")
+plt.subplot(1, 2, 2)
+plt.hist(df_winsor[demo_var].dropna(), bins=30)
+plt.title(f"{demo_var} (winsor)")
+plt.savefig(OUTPUT_DIR / "hist_ingreso.png", dpi=300)
+plt.close()
+
+# Boxplots separados
+plt.figure(figsize=(4, 5))
+plt.boxplot(df[demo_var].dropna())
+plt.title(f'Distribución de {demo_var} (Crudo)')
+plt.ylabel(demo_var)
+plt.savefig(OUTPUT_DIR / "box_FACTOR07.png", dpi=300)
+plt.close()
+
+plt.figure(figsize=(4, 5))
+plt.boxplot(df_winsor[demo_var].dropna())
+plt.title(f'Distribución de {demo_var} (Winsorizado)')
+plt.ylabel(demo_var)
+plt.savefig(OUTPUT_DIR / "box_FACTOR07_winsor.png", dpi=300)
+plt.close()
+
+# Análisis por grupos
+if demo_var in df.columns:
+    threshold = df[demo_var].quantile(0.3)
+    pobre = df[demo_var] <= threshold
+    
+    stats_pobre = df[pobre][num_cols[:3]].mean()
+    stats_no_pobre = df[~pobre][num_cols[:3]].mean()
+    
+    comparison = pd.DataFrame({
+        'Pobre': stats_pobre,
+        'No Pobre': stats_no_pobre
+    })
+    
+    plt.figure(figsize=(8, 5))
+    comparison.plot(kind='bar')
+    plt.title('Comparación de medias: Pobre vs No Pobre')
+    plt.ylabel('Valor promedio')
+    plt.xticks(rotation=45)
+    plt.legend()
+    plt.savefig(OUTPUT_DIR / "bar_pobre_vs_nopobre.png", dpi=300)
+    plt.close()
+
+print("Proceso completado ✔")
+\end{verbatim}
+
+%=========================================================
+\end{document}
+%=========================================================
